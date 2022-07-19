@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { View, Text, TextInput, Switch, StyleSheet, TouchableOpacity } from 'react-native';
 
 import { Picker } from '@react-native-picker/picker';
+import Slider from '@react-native-community/slider';
+
 
 class App extends Component{
   
@@ -12,12 +14,11 @@ class App extends Component{
       age: '',
       gender: 0,
       genders: [
-        {genderName: 'Masculino', val: 1},
-        {genderName: 'Feminino', val: 2},
-        {genderName: 'Outros', val: 3},
-        {genderName: 'Prefiro não dizer', val: 4}
+        {genderName: 'Male', val: 1},
+        {genderName: 'Female', val: 2},
+        {genderName: 'Others', val: 3},
       ],
-      money: 0,
+      money: 50,
       student: false
 
     }
@@ -38,27 +39,27 @@ class App extends Component{
 
         <View style={styles.inputArea}>
           <View style={styles.inputTextArea}>
-            <Text style={styles.inputText}>Nome</Text>
+            <Text style={styles.inputText}>Name</Text>
           </View>
           <TextInput style={styles.input}
-          placeholder = 'Digite seu nome'
+          placeholder = 'Your name'
           onChangeText={(value) => this.setState({name: value})}
           />          
         </View>
 
         <View style={styles.inputArea}>
           <View style={styles.inputTextArea}>
-            <Text style={styles.inputText}>Idade</Text>
+            <Text style={styles.inputText}>Age</Text>
           </View>
           <TextInput style={styles.input}
-          placeholder = 'Digite sua idade'
+          placeholder = 'Your age'
           onChangeText={(value) => this.setState({age: value})}
           keyboardType={'number-pad'}
           />          
         </View>
 
         <View style={styles.inputTextArea}>
-            <Text style={styles.pickerText}>Gênero</Text>
+            <Text style={styles.pickerText}>Gender</Text>
           </View>
         
         <View style={styles.pickerGender}>
@@ -72,13 +73,20 @@ class App extends Component{
         </View>
 
         <View style={styles.inputArea}>
-          <TextInput style={styles.input}
-          placeholder = 'Saldo - Trocar para Slider'
-          />          
+
+          <Text style={styles.sliderText}>Balance: $ {this.state.money.toFixed(2)}</Text>
+
+          <Slider
+          style={styles.sliderArea}
+          minimumValue={50}
+          maximumValue={5000}
+          value={this.state.money}
+          onValueChange={(money) => this.setState({money: money})}
+          />
         </View>
 
         <View style={styles.switchArea}>
-          <Text style={styles.inputText}>Estudante: </Text>
+          <Text style={styles.inputText}>Student: </Text>
           <Switch
           value={this.state.student}
           onValueChange={ (valueSwitch) => this.setState({student: valueSwitch})} 
@@ -161,6 +169,16 @@ const styles = StyleSheet.create({
   switchArea:{
     marginLeft: 70,
     flexDirection: 'row'
+  },
+  sliderArea:{
+    width: 300,
+    margin: 10
+  },
+  sliderText:{
+    fontSize:22,
+    color: '#0D7008',
+    fontWeight:'700',
+    margin: 20
   },
   btnArea:{
     alignItems: 'center',
