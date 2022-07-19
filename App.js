@@ -96,8 +96,19 @@ class App extends Component{
         <View style={styles.btnArea}>
 
         <TouchableOpacity style={styles.btnSend} 
-        onPress={() => alert("Nome: " + this.state.name + '\n' +"idade: " + this.state.age + '\n' +
-        "Gênero: " + this.state.gender + '\n' + (this.state.student ? "É estudante" : "Não é estudante"))}>
+        onPress={() => {
+          if(this.state.name !== '' || this.state.age !== '' ){
+          alert("Name: " + this.state.name + '\n' +
+          "Age: " + this.state.age + '\n' +
+          "Gender selected: " + this.state.genders[this.state.gender].genderName + '\n' +
+          "Initial Balance:" + this.state.money.toFixed(2) + '\n' +
+          (this.state.student ? "is Student" : "is not Student"))
+        }else{
+          alert("Fields cannot be empty")
+        }
+}
+          
+          }>
           <Text style={styles.btnText}>Send</Text>
         </TouchableOpacity>
 
